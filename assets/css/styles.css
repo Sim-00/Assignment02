@@ -1,0 +1,17 @@
+.row {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.container {
+    justify-content: center;
+}
+
+p {
+    text-align: justify;
+    vertical-align: bottom;
+    margin-left: 5%;
+    margin-right: 5%;
+    font-family: 'Averia Serif Libre', serif
+}
+

@@ -1,0 +1,69 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": "container",
+    "height": 500,
+    "projection": {"type": "mercator"},
+    "title": "Percentage of internet user in each country",
+    "data":{
+        "url": "./global.topojson",
+        "format": {"type": "topojson", "feature": "global"}
+    },
+    "transform": [{
+            "lookup": "properties.name",
+            "from": {
+                "data": {
+                    "url": "../Datasets/share-of-individuals-using-the-internet.csv"
+                },
+                "key": "Entity",
+                "fields": ["individuals"]
+            }
+        }
+    ],
+    "params": [
+        {   
+            "name": "yearFilter",
+            "value":1990,
+            "bind": {
+                "input": "range",
+                "min": 1990,
+                "max": 2016,
+                "name": "Year",
+                "step": 1
+            }
+        }
+    ],
+    "layer":[
+        {
+            "transform": [{
+                "calculate": "'Data is not available in ' + datum.properties.name", "as": "note"
+            }],
+            "mark": {"type": "geoshape", "color":"lightgray", "stroke":"white"},
+            "encoding": {
+                "tooltip":{
+                    "field": "note",
+                    "title": "note"
+                }
+            }
+        },
+        {
+            "mark": {"type": "geoshape", "stroke":"black"},
+            "encoding": {
+                "color": {
+                    "field": "individuals",
+                    "type": "quantitative",
+                    "title": "Internet user (per 100 people)"
+                },
+                "tooltip": [{
+                    "field":"properties.name",
+                    "title": "Country"
+                },{   
+                    "field": "individuals",
+                    "type": "quantitative",
+                    "title": "Percentage ",
+                    "format": ".1f"
+                }]
+            }
+        }
+    ]
+
+}

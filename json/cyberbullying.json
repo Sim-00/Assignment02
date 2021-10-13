@@ -1,0 +1,57 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": "container",
+    "height": 500,
+    "title": {"text": "Percentage of parents that reported their child as cyberbully victim"},
+    "projection": {"type":"mercator"},
+    "data": {
+        "url": "./global.topojson",
+        "format": {"type": "topojson", "feature": "global"}
+    },
+    "transform": [
+        {
+            "lookup": "properties.name",
+            "from": {
+                "data": {
+                    "url": "../Datasets/cyberbullying.csv"
+                },
+                "key": "Country",
+                "fields": ["Percentage"]
+            }
+        }
+    ],
+    "layer":[
+        {
+            "transform": [{
+                "calculate": "'Data is not available in ' + datum.properties.name", "as": "note"
+            }],
+            "mark": {"type": "geoshape", "color":"lightgray", "stroke":"white"},
+            "encoding": {
+                "tooltip":{
+                    "field": "note",
+                    "title": "note"
+                }
+            }
+        },
+        {
+            "mark": {"type": "geoshape", "stroke":"black"},
+            "encoding": {
+                "color": {
+                    "field": "Percentage",
+                    "type": "quantitative"
+                },
+                "tooltip": [{
+                    "field":"properties.name",
+                    "title": "Country"
+                },{   
+                    "field": "Percentage",
+                    "type": "quantitative",
+                    "format": ".1f"
+                }]
+            }
+        }
+    ],
+    "config": {
+        "background":"transparent"
+    }
+}
