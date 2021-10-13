@@ -13,7 +13,7 @@
             "lookup": "properties.name",
             "from": {
                 "data": {
-                    "url": "../Datasets/gapminder_internet.csv"
+                    "url": "./Datasets/gapminder_internet.csv"
                 },
                 "key": "country",
                 "fields": ["internetuserate"]
