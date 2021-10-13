@@ -4,7 +4,7 @@
     "height": 500,
     "title": {"text": "Percentage of Children as Cyberbully Victim"},
     "data": {
-        "url": "../Datasets/cyberbullying.csv"
+        "url": "./Datasets/cyberbullying.csv"
     },
     "mark": "bar",
     "encoding": {

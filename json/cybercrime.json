@@ -4,7 +4,7 @@
     "height": 500,
     "title": {"text": "Cybercrime targets and Money involved"},
     "data": {
-        "url": "../Datasets/cybercrime.csv"
+        "url": "./Datasets/cybercrime.csv"
     },
     "mark": "bar",
     "transform": [

@@ -4,7 +4,7 @@
     "height": 500,
     "title": {"text": "Google search growth from 2000 to 2012"},
     "data": {
-        "url": "../Datasets/googleSearches.csv"
+        "url": "./Datasets/googleSearches.csv"
     },
     "mark": "line",
     "transform": [

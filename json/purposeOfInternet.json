@@ -3,7 +3,7 @@
     "width": "container",
     "height": 300,
     "data":{
-        "url": "../Datasets/purposeInternet.csv"
+        "url": "./Datasets/purposeInternet.csv"
     },
     "mark": "arc",
     "encoding": {

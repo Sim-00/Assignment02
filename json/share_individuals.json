@@ -12,7 +12,7 @@
             "lookup": "properties.name",
             "from": {
                 "data": {
-                    "url": "../Datasets/share-of-individuals-using-the-internet.csv"
+                    "url": "./Datasets/share-of-individuals-using-the-internet.csv"
                 },
                 "key": "Entity",
                 "fields": ["individuals"]
