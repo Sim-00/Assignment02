@@ -1,7 +1,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": "container",
-    "height": 500,
+    "height": 300,
     "title": {"text": "Google search growth from 2000 to 2012"},
     "data": {
         "url": "./Datasets/googleSearches.csv"
