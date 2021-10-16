@@ -1,11 +1,11 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": "container",
-    "height": 500,
+    "height": 600,
     "title": {"text": "Percentage of parents that reported their child as cyberbully victim"},
     "projection": {"type":"mercator"},
     "data": {
-        "url": "./global.topojson",
+        "url": "./json/global.topojson",
         "format": {"type": "topojson", "feature": "global"}
     },
     "transform": [
@@ -13,10 +13,10 @@
             "lookup": "properties.name",
             "from": {
                 "data": {
-                    "url": "./Datasets/cyberbullying.csv"
+                    "url": "../Datasets/cyberbullying.csv"
                 },
                 "key": "Country",
-                "fields": ["Percentage"]
+                "fields": ["Percentage","rank","lat","long"]
             }
         }
     ],
@@ -48,6 +48,92 @@
                     "type": "quantitative",
                     "format": ".1f"
                 }]
+            }
+        },
+        {
+            "transform": [
+                {"filter": "datum.rank == 28"},
+                {
+                    "calculate": "datum.properties.name + ' is Rank #28 (Last)'", "as": "text_annotation"
+                }
+            ],
+            
+            "mark": {
+                "type": "text",
+                "dy": -10
+            },
+            "encoding": {
+                "latitude": {
+                    "field": "lat"
+                },
+                "longitude":{
+                    "field": "long"
+                },
+                "text": {
+                    "field": "text_annotation"
+                }
+            }
+        },
+        {
+            "transform": [
+                {"filter": "datum.rank == 28"}
+            ],
+            "mark": {
+                "type": "circle",
+                "color": "orangered",
+                "size": 40
+            },
+            "encoding": {
+                "latitude": {
+                    "field": "lat"
+                },
+                "longitude":{
+                    "field": "long"
+                }
+            }
+        },
+        {
+            "transform": [
+                {"filter": "datum.rank == 1"},
+                {
+                    "calculate": "datum.properties.name + ' is Rank #1'", "as": "text_annotation"
+                }
+            ],
+            
+            "mark": {
+                "type": "text",
+                "dy": 40,
+                "color": "black",
+                "width": 1
+            },
+            "encoding": {
+                "latitude": {
+                    "field": "lat"
+                },
+                "longitude":{
+                    "field": "long"
+                },
+                "text": {
+                    "field": "text_annotation"
+                }
+            }
+        },
+        {
+            "transform": [
+                {"filter": "datum.rank == 1"}
+            ],
+            "mark": {
+                "type": "circle",
+                "color": "orangered",
+                "size": 40
+            },
+            "encoding": {
+                "latitude": {
+                    "field": "lat"
+                },
+                "longitude":{
+                    "field": "long"
+                }
             }
         }
     ],

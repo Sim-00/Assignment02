@@ -1,60 +1,258 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": "container",
-    "height": 500,
-    "title": {"text": ["Global Internet users per 100 people"]},
-    "projection": {"type": "mercator"},
-    "data": {
-        "url": "./json/global.topojson",
-        "format": {"type": "topojson", "feature": "global"}
-    },
-    "transform": [
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "width": 1100,
+    "height": 600,
+    "autosize":"none",
+    "data": [
         {
-            "lookup": "properties.name",
-            "from": {
-                "data": {
-                    "url": "./Datasets/gapminder_internet.csv"
-                },
-                "key": "country",
-                "fields": ["internetuserate"]
-            }
-        }
-    ],
-    "layer":[
-        {
-            "transform": [{
-                "calculate": "'Data is not available in ' + datum.properties.name", "as": "note"
-            }],
-            "mark": {"type": "geoshape", "color":"lightgray", "stroke":"white"},
-            "encoding": {
-                "tooltip":{
-                    "field": "note",
-                    "title": "note"
-                }
+            "name": "gapminder",
+            "url": "./Datasets/gapminder_internet.csv",
+            "format": {
+                "type": "csv"
             }
         },
         {
-            "mark": {"type": "geoshape", "stroke":"black"},
-            "encoding": {
-                "color": {
-                    "field": "internetuserate",
-                    "type": "quantitative",
-                    "title": "Internet user (per 100 people)"
+            "name": "world",
+            "url": "./json/global.topojson",
+            "format": {
+                "type": "topojson",
+                "feature": "global"
+            },
+            "transform": [
+                {
+                    "type": "lookup",
+                    "from": "gapminder",
+                    "key": "country",
+                    "fields": ["properties.name"],
+                    "values": ["internetuserate"],
+                    "as": ["obj"]
+                }
+            ]
+        }
+    ],
+    "signals": [
+        { 
+            "name": "tx", 
+            "update": "width / 2" 
+        },
+        { 
+            "name": "ty", 
+            "update": "height / 2" 
+        },
+        {
+            "name": "scale",
+            "value": 145,
+            "on": [{
+                "events": {
+                    "type": "wheel", 
+                    "consume": true
                 },
-                "tooltip": [{
-                    "field":"properties.name",
-                    "title": "Country"
-                },{   
-                    "field": "internetuserate",
-                    "type": "quantitative",
-                    "title": "Internet users (per 100 people)",
-                    "format": ".1f"
-                }]
+                "update": "clamp(scale * pow(1.0005, -event.deltaY * pow(16, event.deltaMode)), 150, 3000)"
+          }]
+        },
+        {
+            "name": "centerY", 
+            "value": 45,
+            "on": [{
+                "events": {
+                    "signal": "delta"
+                },
+                "update": "clamp(angles[1] + delta[1], -60, 60)"
+            }]
+        },
+        {
+            "name": "angles",
+            "value": [0, 0],
+            "on": [{
+                "events": "mousedown",
+                "update": "[rotateX, centerY]"
+            }]
+        },
+        {
+            "name": "cloned",
+            "value": null,
+            "on": [{
+                "events": "mousedown",
+                "update": "copy('projection')"
+            }]
+        },
+        {
+            "name": "start",
+            "value": null,
+            "on": [{
+                "events": "mousedown",
+                "update": "invert(cloned, xy())"
+          }]
+        },
+        {
+            "name": "drag", "value": null,
+            "on": [{
+                "events": "[mousedown, window:mouseup] > window:mousemove",
+                "update": "invert(cloned, xy())"
+            }]
+        },
+        {
+            "name": "delta", 
+            "value": null,
+            "on": [{
+                "events": {
+                    "signal": "drag"
+                },
+                "update": "[drag[0] - start[0], start[1] - drag[1]]"
+            }]
+        },
+        {
+            "name": "rotateX", "value": 0,
+            "on": [{
+                "events": {
+                    "signal": "delta"
+                },
+                "update": "angles[0] + delta[0]"
+            }]
+        }
+    ],
+    "projections": [
+        {
+            "name": "projection",
+            "type": "mercator",
+            "scale": {
+                "signal": "scale"
+            },
+            "rotate": [{
+                "signal": "rotateX"
+                }, 
+                0, 
+                0
+            ],
+            "center": [
+                0, 
+                {
+                    "signal": "centerY"
+                }
+            ],
+            "translate": [
+                {
+                    "signal": "tx"
+                }, 
+                {
+                    "signal": "ty"
+                }
+            ]
+        }
+    ],
+    "scales": [
+        {
+            "name": "mapColor",
+            "type": "linear",
+            "domain":{
+                "data": "world",
+                "field": "obj"
+            },
+            "range": {
+                "scheme": "tealblues"
             }
+        }
+    ],
+    "marks":[
+        {
+            "type": "shape",
+            "from": {
+                "data": "world"
+            },
+            "encode": {
+                "enter": {
+                    "tooltip": [
+                        {
+                            "signal": "{'Country': datum.properties.name + ' has no data'}"
+                        }
+                    ],
+                    "stroke": {
+                        "value": "black"
+                    },
+                    "fill":[
+                        {
+                            "value": "lightgray"
+                        }
+                    ]
+                },
+                "hover": {
+                    "stroke": {
+                        "value": "black"
+                    },
+                    "strokeWidth": {
+                        "value": 1.5
+                    }
+                },
+                "update": {
+                    "stroke": {
+                        "value": "lightgray"
+                    },
+                    "strokeWidth":{
+                        "value": 0.1
+                    }
+                }
+        },
+        "transform": [
+                {
+                    "type": "geoshape",
+                    "projection": "projection"
+                }
+            ]
+        },
+        {
+            "type": "shape",
+            "from": {
+                "data": "world"
+            },
+            "encode": {
+                "enter": {
+                    "tooltip": [
+                        {
+                            "signal": "{'Country': datum.properties.name + ' ' , 'Internet users': format(datum.obj, '.2f')}"
+                        }
+                    ],
+                    "stroke": {
+                        "value": "black"
+                    },
+                    "fill":[
+                        {
+                            "field": "obj",
+                            "scale": "mapColor"
+                        }
+                    ]
+                },
+                "hover": {
+                    "stroke": {
+                        "value": "black"
+                    },
+                    "strokeWidth": {
+                        "value": 1.5
+                    }
+                },
+                "update": {
+                    "stroke": {
+                        "value": "lightgray"
+                    },
+                    "strokeWidth":{
+                        "value": 0.1
+                    },
+                    "fill":[
+                        {
+                            "field": "obj",
+                            "scale": "mapColor"
+                        }
+                    ]
+                }     
+        },
+        "transform": [
+                {
+                    "type": "geoshape",
+                    "projection": "projection"
+                }
+            ]
         }
     ],
     "config": {
         "background":"transparent"
     }
-
 }

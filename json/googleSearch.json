@@ -6,31 +6,102 @@
     "data": {
         "url": "./Datasets/googleSearches.csv"
     },
-    "mark": "line",
     "transform": [
         {
             "calculate": "datum.Searches/1000000", "as": "calculatedSearches"
         }
     ],
     "encoding": {
+        "x": {
+            "field": "Year"
+        },
         "tooltip": [
             {
-                "field": "Year",
-                "title": "Year "
+                "field": "calculatedSearches",
+                "type": "quantitative",
+                "title": "Google Searches (Millions)",
+                "format": ".0f"
+            },
+            {
+                "field": "InternetUsers",
+                "type": "quantitative",
+                "title": "Internet users (Millions)"
             }
-        ],
-        "x": {
-            "field": "Year",
-            "type": "ordinal",
-            "title": "Year",
-            "axis": {
-                "labelAngle": 0
+        ]
+    },
+    "layer": [
+        {
+            "mark": {
+                "type": "line",
+                "stroke": "#f58231",
+                "point": {
+                    "color": "#f58231"
+                }
+            },
+            "encoding": {
+                "y":{
+                    "field": "calculatedSearches",
+                    "type": "quantitative",
+                    "title": "Number of searches in millions",
+                    "axis": {"titleColor":"#f58231"}
+                }
             }
         },
-        "y":{
-            "field": "calculatedSearches",
-            "type": "quantitative",
-            "title": "Number of searches in millions"
+        {
+            "params": [
+                {
+                    "name": "highlight",
+                    "select": {
+                        "type": "point", 
+                        "on": "mouseover",
+                        "clear": "mouseout"
+                    }
+                },
+                {
+                    "name": "select", 
+                    "select": "point"
+                }
+            ],
+            "mark": {
+                "type": "bar",
+                "color": "#4363d8",
+                "stroke": "black",
+                "cornerRadiusTopLeft": 5,
+                "cursor": "pointer"
+            },
+            "encoding": {
+                "y": {
+                    "field": "InternetUsers",
+                    "type": "quantitative",
+                    "title": "Internet users in Millions",
+                    "axis": {
+                        "titleColor": "#4363d8"
+                    }
+                },
+                "fillOpacity": {
+                    "condition": {
+                        "param": "highlight", 
+                        "empty": false,
+                        "value": 0.5
+                    },
+                    "value": 0.3
+                },
+                "strokeWidth": {
+                    "condition":[
+                        {
+                            "param": "highlight",
+                            "empty": false,
+                            "value": 2
+                        }
+                    ],
+                    "value": 0
+                }
+            }
+        }
+    ],
+    "resolve": {
+        "scale": {
+            "y": "independent"
         }
     },
     "config": {

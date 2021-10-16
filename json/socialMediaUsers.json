@@ -1,0 +1,64 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": "container",
+    "height": 300,
+    "title": "Number of users in each Social Media Platform",
+    "data": {
+        "url": "./Datasets/SocialMediaUsers.csv"
+    },
+    "mark": {
+        "type": "rect"
+    },
+    "params": [
+        {
+            "name": "highlight",
+            "select": {
+                "type": "point",
+                "on": "mouseover"
+            }
+        }
+    ],
+    "encoding": {
+        "y":{
+            "field": "Platform",
+            "type": "nominal",
+            "sort": [
+                "Facebook", "Youtube", "Instagram", "Twitter"
+            ]
+        },
+        "x": {
+            "field": "Year",
+            "type": "ordinal",
+            "axis": {
+                "labelAngle": 0
+            }
+        },
+        "stroke": {
+            "value": "black"
+        },
+        "strokeWidth":{
+            "condition": {
+                "param": "highlight",
+                "empty": false,
+                "value": 1
+            },
+            "value": 0
+        },
+        "color":{
+            "field": "Users",
+            "type": "quantitative",
+            "title": "Users (Millions)"
+        },
+        "tooltip": [{
+            "field": "Platform",
+            "type": "nominal"
+        },{
+            "field": "Users",
+            "type": "quantitative",
+            "title": "Users in Millions"
+        }]
+    },
+    "config": {
+        "background": "transparent"
+    }
+}

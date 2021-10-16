@@ -6,7 +6,6 @@
     "data": {
         "url": "./Datasets/cybercrime.csv"
     },
-    "mark": "bar",
     "transform": [
         {
             "calculate": "datum.lost/1000000",
@@ -17,37 +16,94 @@
             "as": "lostMillion"
         }
     ],
-    "encoding": {
-        "tooltip": [
-            {
-                "field": "totalLost",
-                "title": "Money lost (millions)",
-                "format": ".1f"
+    "layer": [
+        {
+            "params": [
+                {
+                    "name": "highlight",
+                    "select": {
+                        "type": "point",
+                        "on": "mouseover"
+                    }
+                }
+            ],
+            "mark": "bar",
+            "encoding": {
+                "tooltip": [
+                    {
+                        "field": "totalLost",
+                        "title": "Money lost (millions)",
+                        "format": ".1f"
+                    },
+                    {
+                        "field": "year",
+                        "title": "Year "
+                    }
+                ],
+                "x": {
+                    "field": "age",
+                    "type": "ordinal",
+                    "sort": ["Under 20", "20-29", "30-39", "40-49", "50-59", "Above 60"],
+                    "title": "Age group",
+                    "axis": {
+                        "labelAngle": 0
+                    }
+                },
+                "y":{
+                    "field": "lostMillion",
+                    "type": "quantitative",
+                    "title": "Money lost (millions)"
+                },
+                "stroke":{
+                    "value": "black"
+                },
+                "strokeWidth":{
+                    "condition": {
+                        "empty": false,
+                        "param": "highlight",
+                        "value": 2
+                    }, "value": 0
+                },
+                "color": {
+                    "field": "year",
+                    "title": "Year",
+                    "type": "nominal",
+                    "sort": [
+                        "2016", "2017","2018","2019","2020"
+                    ]
+                }
+            }
+        },{
+            "mark": {
+                "type": "text",
+                "align":"center",
+                "dy": -10
             },
-            {
-                "field": "year",
-                "title": "Year "
+            "encoding": {
+                "x": {
+                    "field": "age",
+                    "type": "ordinal",
+                    "sort": ["Under 20", "20-29", "30-39", "40-49", "50-59", "Above 60"],
+                    "title": "Age group",
+                    "axis": {
+                        "labelAngle": 0
+                    }
+                },
+                "y":{
+                    "aggregate": "sum",
+                    "field": "lostMillion",
+                    "type": "quantitative",
+                    "title": "Money lost (millions)"
+                },
+                "text": {
+                    "aggregate": "sum",
+                    "field": "lostMillion",
+                    "type": "quantitative",
+                    "format": ".1f"
+                }
             }
-        ],
-        "x": {
-            "field": "age",
-            "type": "ordinal",
-            "sort": ["Under 20", "20-29", "30-39", "40-49", "50-59", "Above 60"],
-            "title": "Age group",
-            "axis": {
-                "labelAngle": 0
-            }
-        },
-        "y":{
-            "field": "lostMillion",
-            "type": "quantitative",
-            "title": "Money lost (millions)"
-        },
-        "color": {
-            "field": "year",
-            "title": "Year"
         }
-    },
+    ],
     "config": {
         "background": "transparent",
         "axis": {

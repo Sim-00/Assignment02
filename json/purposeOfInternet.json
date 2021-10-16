@@ -5,15 +5,19 @@
     "data":{
         "url": "./Datasets/purposeInternet.csv"
     },
-    "mark": "arc",
     "encoding": {
         "theta":{
             "field": "Percentage",
-            "type":"quantitative"
+            "type":"quantitative",
+            "stack": true
         },
         "color":{
             "field": "Purpose",
             "type": "nominal"
+        },
+        "radius": {
+            "field": "Percentage",
+            "type": "quantitative"
         },
         "tooltip": [
             {
@@ -28,6 +32,29 @@
             }
         ]
     },
+    "layer": [
+       {
+           "mark": {
+               "type": "arc"
+           }
+       },
+       {
+           "mark":{
+               "type": "text",
+               "radiusOffset": 10
+           },
+           "encoding": {
+               "text":{
+                   "field": "Percentage",
+                   "type":"quantitative",
+                   "format": ".1f"
+               },
+               "color": {
+                   "value": "black"
+               }
+           }
+       }
+    ],
     "config": {
         "background":"transparent"
     }

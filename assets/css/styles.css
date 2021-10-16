@@ -12,6 +12,25 @@ p {
     vertical-align: bottom;
     margin-left: 5%;
     margin-right: 5%;
-    font-family: 'Averia Serif Libre', serif
+    font-family: Arial, Helvetica, sans-serif;
 }
 
+.col hr {
+    height: 3px;
+    background-color: black;
+}
+
+.col-auto{
+    font-size: 26px;
+    margin-top: -5px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+h1 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 40px;
+    margin-top: 40px;
+    font-family: 'Times New Roman', Times, serif;
+}

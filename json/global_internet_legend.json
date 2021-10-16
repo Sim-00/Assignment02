@@ -1,0 +1,58 @@
+{
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "width": 600,
+    "height": 50,
+    "autosize":"fit",
+    "data": [
+        {
+            "name": "gapminder",
+            "url": "./Datasets/gapminder_internet.csv",
+            "format": {
+                "type": "csv"
+            }
+        },
+        {
+            "name": "world",
+            "url": "./json/global.topojson",
+            "format": {
+                "type": "topojson",
+                "feature": "global"
+            },
+            "transform": [
+                {
+                    "type": "lookup",
+                    "from": "gapminder",
+                    "key": "country",
+                    "fields": ["properties.name"],
+                    "values": ["internetuserate"],
+                    "as": ["obj"]
+                }
+            ]
+        }
+    ],
+    "scales": [
+        {
+            "name": "mapColor",
+            "type": "linear",
+            "domain":{
+                "data": "world",
+                "field": "obj"
+            },
+            "range": {
+                "scheme": "tealblues"
+            }
+        }
+    ],
+    "legends":[
+        {
+            "fill": "mapColor",
+            "direction": "horizontal",
+            "title": "Internet users",
+            "orient": "right",
+            "offset": 100
+        }
+    ],
+    "config": {
+        "background":"transparent"
+    }
+}
