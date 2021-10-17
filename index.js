@@ -33,6 +33,7 @@ With no surprise, most people use the internet to  <b>search for
 
 let paragraph3 =
 `
+The <b>ease of accessing information online </b> is definitely a <b>major advantage</b> of the Internet.
 Naturally people who use internet to get information will <b>use search engines </b> and google being
 the most popular search engine has seen an <b> exponential increase in usage </b> over the decade.
 `;
