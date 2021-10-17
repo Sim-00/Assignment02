@@ -1,29 +1,29 @@
-Country,Percentage,rank,lat,long
-India,37,1,20.5937,78.9629
-Brazil,29,2,empty,empty
-United States,26,3,empty,empty
-Belgium,25,4,empty,empty
-South Africa,26,5,empty,empty
-Malaysia,23,6,empty,empty
-Sweden,23,7,empty,empty
-Canada,20,8,empty,empty
-Turkey,20,9,empty,empty
-Saudi Arabia,19,10,empty,empty
-Australia,19,11,empty,empty
-Mexico,18,12,empty,empty
-United Kingdom,18,13,empty,empty
-China,17,14,empty,empty
-Serbia,16,15,empty,empty
-Germany,14,16,empty,empty
-Argentina,14,17,empty,empty
-Peru,14,18,empty,empty
-South Korea,13,19,empty,empty
-Italy,12,20,empty,empty
-Poland,12,21,empty,empty
-Romania,11,22,empty,empty
-Hungary,10,23,empty,empty
-Spain,9,24,empty,empty
-France,9,25,empty,empty
-Chile,8,26,empty,empty
-Japan,5,27,empty,empty
-Russia,1,28,61.524,105.3188
+Country,Percentage,rank,,
+India,37,1,,
+Brazil,29,2,,
+United States,26,3,,
+Belgium,25,4,,
+South Africa,26,5,,
+Malaysia,23,6,,
+Sweden,23,7,,
+Canada,20,8,,
+Turkey,20,9,,
+Saudi Arabia,19,10,,
+Australia,19,11,,
+Mexico,18,12,,
+United Kingdom,18,13,,
+China,17,14,,
+Serbia,16,15,,
+Germany,14,16,,
+Argentina,14,17,,
+Peru,14,18,,
+South Korea,13,19,,
+Italy,12,20,,
+Poland,12,21,,
+Romania,11,22,,
+Hungary,10,23,,
+Spain,9,24,,
+France,9,25,,
+Chile,8,26,,
+Japan,5,27,,
+Russia,1,28,,

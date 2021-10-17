@@ -4,7 +4,7 @@
     "height": 600,
     "title": {"text": "Percentage of parents that reported their child as cyberbully victim",
     "fontSize": 16},
-    "projection": {"type":"mercator"},
+    "projection": {"type": "mercator"},
     "data": {
         "url": "./json/global.topojson",
         "format": {"type": "topojson", "feature": "global"}
@@ -17,7 +17,17 @@
                     "url": "./Datasets/cyberbullying.csv"
                 },
                 "key": "Country",
-                "fields": ["Percentage","rank","lat","long"]
+                "fields": ["Percentage","rank"]
+            }
+        },
+        {
+            "lookup": "properties.name",
+            "from":{
+                "data":{
+                    "url": "./Datasets/countryCoordinates.csv"
+                },
+                "key": "country",
+                "fields": ["latitude","longitude"]
             }
         }
     ],
@@ -39,7 +49,15 @@
                 "name": "select_country",
                 "select": {"type": "point", "fields": ["properties.name"]},
                 "bind": {"input": "select", "options": [null, "India","Brazil", "United States","Belgium","South Africa","Malaysia","Sweden","Canada","Turkey","Saudi Arabia","Australia","Mexico","United Kingdom","China","Serbia","Germany","Argentina","Peru","South Korea","Italy","Poland","Romania","Hungary","Spain","France","Chile","Japan","Russia"], "name": "Country: "}
-            }],
+            },                
+            {
+                "name": "highlight",
+                "select": {
+                    "type": "point",
+                    "on": "mouseover"
+                }
+            }
+        ],
             "mark": {"type": "geoshape", "stroke":"black"},
             "encoding": {
                 "color": {
@@ -50,7 +68,6 @@
                         "empty": true
                     },
                     "value":null
-
                 },
                 "tooltip": [{
                     "field":"properties.name",
@@ -69,18 +86,17 @@
                     "calculate": "datum.properties.name + ' is Rank #28 (Last)'", "as": "text_annotation"
                 }
             ],
-            
             "mark": {
                 "type": "text",
-                "dy": -10,
-                "fontSize":14
+                "fontSize":14,
+                "dy": -10
             },
             "encoding": {
                 "latitude": {
-                    "field": "lat"
+                    "field": "latitude"
                 },
                 "longitude":{
-                    "field": "long"
+                    "field": "longitude"
                 },
                 "text": {
                     "field": "text_annotation"
@@ -98,10 +114,10 @@
             },
             "encoding": {
                 "latitude": {
-                    "field": "lat"
+                    "field": "latitude"
                 },
                 "longitude":{
-                    "field": "long"
+                    "field": "longitude"
                 }
             }
         },
@@ -120,11 +136,12 @@
             },
             "encoding": {
                 "latitude": {
-                    "field": "lat"
+                    "field": "latitude"
                 },
                 "longitude":{
-                    "field": "long"
+                    "field": "longitude"
                 },
+                
                 "text": {
                     "field": "text_annotation"
                 }
@@ -141,10 +158,70 @@
             },
             "encoding": {
                 "latitude": {
-                    "field": "lat"
+                    "field": "latitude"
                 },
                 "longitude":{
-                    "field": "long"
+                    "field": "longitude"
+                }
+            }
+        },
+        {
+            "transform": [
+                {
+                    "filter": "datum.rank != 28 && datum.rank != 1"
+                }
+            ],
+            "mark": {
+                "type": "circle",
+                "color": "orangered",
+                "size": 40
+            },
+            "encoding": {
+                "opacity": {
+                    "condition":{
+                        "param": "select_country",
+                        "empty": false,
+                        "value": 1
+                    }, "value": 0
+                },
+                "latitude": {
+                    "field": "latitude"
+                },
+                "longitude":{
+                    "field": "longitude"
+                }
+            }
+        },
+        {
+            "transform": [
+                {
+                    "calculate": "datum.properties.name + ' is Rank #' + datum.rank", "as": "text_annotation"
+                },
+                {
+                    "filter": "datum.rank != 28 && datum.rank != 1"
+                }
+            ],
+            "mark": {
+                "type": "text",
+                "fontSize": 16,
+                "dy": -10
+            },
+            "encoding": {
+                "color": {
+                    "condition":{
+                        "param": "select_country",
+                        "empty": false,
+                        "value": "black"
+                    }, "value": "transparent"
+                },
+                "latitude": {
+                    "field": "latitude"
+                },
+                "longitude": {
+                    "field": "longitude"
+                },
+                "text": {
+                    "field": "text_annotation"
                 }
             }
         }

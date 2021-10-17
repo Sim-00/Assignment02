@@ -54,7 +54,7 @@
     ],
     "config": {
         "legend": {
-            "labelFontSize": 14,
+            "labelFontSize": 13,
             "titleFontSize": 16
         },
         "background":"transparent"
