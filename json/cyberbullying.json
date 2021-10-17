@@ -2,7 +2,8 @@
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": "container",
     "height": 600,
-    "title": {"text": "Percentage of parents that reported their child as cyberbully victim"},
+    "title": {"text": "Percentage of parents that reported their child as cyberbully victim",
+    "fontSize": 16},
     "projection": {"type":"mercator"},
     "data": {
         "url": "./json/global.topojson",
@@ -34,11 +35,22 @@
             }
         },
         {
+            "params": [{
+                "name": "select_country",
+                "select": {"type": "point", "fields": ["properties.name"]},
+                "bind": {"input": "select", "options": [null, "India","Brazil", "United States","Belgium","South Africa","Malaysia","Sweden","Canada","Turkey","Saudi Arabia","Australia","Mexico","United Kingdom","China","Serbia","Germany","Argentina","Peru","South Korea","Italy","Poland","Romania","Hungary","Spain","France","Chile","Japan","Russia"], "name": "Country: "}
+            }],
             "mark": {"type": "geoshape", "stroke":"black"},
             "encoding": {
                 "color": {
-                    "field": "Percentage",
-                    "type": "quantitative"
+                    "condition":{
+                        "param": "select_country",
+                        "field": "Percentage",
+                        "type": "quantitative",
+                        "empty": true
+                    },
+                    "value":null
+
                 },
                 "tooltip": [{
                     "field":"properties.name",
@@ -60,7 +72,8 @@
             
             "mark": {
                 "type": "text",
-                "dy": -10
+                "dy": -10,
+                "fontSize":14
             },
             "encoding": {
                 "latitude": {
@@ -103,8 +116,7 @@
             "mark": {
                 "type": "text",
                 "dy": 40,
-                "color": "black",
-                "width": 1
+                "fontSize": 14
             },
             "encoding": {
                 "latitude": {
@@ -138,6 +150,10 @@
         }
     ],
     "config": {
+        "legend": {
+            "labelFontSize": 16,
+            "titleFontSize": 16
+        },
         "background":"transparent"
     }
 }

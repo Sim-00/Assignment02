@@ -16,6 +16,21 @@
                 "type": "point",
                 "on": "mouseover"
             }
+        },
+        {
+            "name": "Year",
+            "value": 2020,
+            "bind": {"input": "range", "min": 2010, "max": 2020, "step": 1}
+        },
+        {
+            "name": "select_platform",
+            "select": {"type": "point", "fields": ["Platform"]},
+            "bind": {"input": "select", "options": [null, "Facebook", "Youtube", "Instagram", "Twitter"], "name": "Platform: "}
+        }
+    ],
+    "transform": [
+        {
+            "filter": "datum.Year <= Year"
         }
     ],
     "encoding": {
@@ -45,9 +60,12 @@
             "value": 0
         },
         "color":{
-            "field": "Users",
-            "type": "quantitative",
-            "title": "Users (Millions)"
+            "condition":{
+                "param": "select_platform",
+                "empty": true,
+                "field": "Users",
+                "type": "quantitative"
+            },"value": null
         },
         "tooltip": [{
             "field": "Platform",
@@ -59,6 +77,17 @@
         }]
     },
     "config": {
+        "title": {
+            "fontSize": 16
+        },
+        "axis": {
+            "labelFontSize":16,
+            "titleFontSize":16
+        },
+        "legend": {
+            "labelFontSize": 16,
+            "titleFontSize": 16
+        },
         "background": "transparent"
     }
 }

@@ -19,46 +19,43 @@ let title = `The good and bad of Internet`;
 document.getElementById("title").innerHTML = title;
 
 let paragraph1 = 
-`Internet has become a big part of our daily lives despite only having a history of few decades and it 
-knows no limit when it comes to development. Most countries have a significant 
-amount of internet users <b><b> especially more developed countries </b></b> and the overall average of internet users 
-per 100 people across all the countries are around 35 people which directly translates to <b><b> ~35 percent </b></b>.`;
+`Internet has become a big part of our daily lives and most people could not even imagine the society today without it. Most countries have a significant 
+amount of internet users <b>especially more developed countries </b> and the overall average of internet users 
+per 100 people across all the countries are around 35 people which directly translates to <b> ~35 percent </b>.`;
 
 let paragraph2 =
-`Even though most individuals access the internet for variety of reasons, it can be categorized into few
+`Most individuals access the internet for variety of purposes, it can be categorized into few
 purposes that are <b><span style="color:#4C78A8">Audios and Videos</span>, <span style="color:#F58518">Communication</span>,
 <span style="color:#E45756">Education</span>, <span style="color:#72B7B2">Information</span>, <span style="color:#54A24B">Others</span></b>.
-With no surprise, most people use the internet to  <b><b>search for 
-<span style="color:#72B7B2"> information </span> </b></b> since online search engines are efficient and effective. 
+With no surprise, most people use the internet to  <b>search for 
+<span style="color:#72B7B2"> information </span> </b>since online search engines are efficient and effective. 
 `;
 
 let paragraph3 =
 `
-Naturally people who use internet to get information will utilize search engines for it and google being
-the most popular search engine has seen an exponential increase in usage.
+Naturally people who use internet to get information will <b>use search engines </b> and google being
+the most popular search engine has seen an <b> exponential increase in usage </b> over the decade.
 `;
 
 let paragraph4 =
-`Despite how convenient internet is and all the advantages considered, due to the anonymity it can provide,
-there are a lot of online activities that are malicious such as cyberbullying. Cyberbullying is very commonly 
-seen on the internet especially in social media websites and these actions in a lot of time are not intentionally
-done because of the spread of false information and the ease of degrading a stranger.
+`Due to the anonymity the Internet provides,
+there are a lot of malicious activities online and the <b> prime example being cyberbullying </b>. Cyberbullying is very commonly 
+seen on the internet especially in social media websites but surprisingly most of these actions are usually <b>not
+purposely commited </b> but rather a result of <b> false information  </b> about the victim being spread.
 `;
 
 let paragraph5=
 `
-Cybercrime on the other hand, is a much more serious offense as it integrates real world
-crimes and typically involves money. These cybercrimes can come in all sorts of variety such as
-identity theft, phishing, fraud, etc. Older generation are typically targeted as they are typically not
-familiar with the online environment and have better financial abilties compared to younger generation.
+Cybercrime on the other hand, is a much more serious offense run by groups of criminals. 
+These cybercrimes can come in all sorts of variety and <b>elder generation are typically targeted </b> as they are typically not
+familiar with the online environment and have <b>better financial abilties </b> compared to younger generation.
 `;
 
 let paragraph6=
 `
-Cybercrime on the other hand, is a much more serious offense as it integrates real world
-crimes and typically involves money. These cybercrimes can come in all sorts of variety such as
-identity theft, phishing, fraud, etc. Older generation are typically targeted as they are typically not
-familiar with the online environment and have better financial abilties compared to younger generation.
+The other aspect that defines the Internet is definitely <b> social media </b>. It acts as a way of bridge
+between people and connects people around the globe, allowing people to share their experiences and
+stories at the touch of a button. 
 `;
 
 let mapTitle = "Global Internet users per 100 people";
@@ -71,64 +68,3 @@ document.getElementById("pg5").innerHTML= paragraph5;
 document.getElementById("pg6").innerHTML= paragraph6;
 
 document.getElementById("vis1title").innerHTML = mapTitle;
-
-// {
-//     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-//     "width": "container",
-//     "height": 500,
-//     "title": {"text": ["Global Internet users per 100 people"]},
-//     "projection": {"type": "mercator"},
-//     "data": {
-//         "url": "./json/global.topojson",
-//         "format": {"type": "topojson", "feature": "global"}
-//     },
-//     "transform": [
-//         {
-//             "lookup": "properties.name",
-//             "from": {
-//                 "data": {
-//                     "url": "./Datasets/gapminder_internet.csv"
-//                 },
-//                 "key": "country",
-//                 "fields": ["internetuserate"]
-//             }
-//         }
-//     ],
-//     "layer":[
-//         {
-//             "transform": [{
-//                 "calculate": "'Data is not available in ' + datum.properties.name", "as": "note"
-//             }],
-//             "mark": {"type": "geoshape", "color":"lightgray", "stroke":"white"},
-//             "encoding": {
-//                 "tooltip":{
-//                     "field": "note",
-//                     "title": "note"
-//                 }
-//             }
-//         },
-//         {
-//             "mark": {"type": "geoshape", "stroke":"black"},
-//             "encoding": {
-//                 "color": {
-//                     "field": "internetuserate",
-//                     "type": "quantitative",
-//                     "title": "Internet user (per 100 people)"
-//                 },
-//                 "tooltip": [{
-//                     "field":"properties.name",
-//                     "title": "Country"
-//                 },{   
-//                     "field": "internetuserate",
-//                     "type": "quantitative",
-//                     "title": "Internet users (per 100 people)",
-//                     "format": ".1f"
-//                 }]
-//             }
-//         }
-//     ],
-//     "config": {
-//         "background":"transparent"
-//     }
-
-// }

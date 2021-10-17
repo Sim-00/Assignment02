@@ -1,9 +1,10 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": "container",
-    "height": 500,
+    "height": 600,
     "title": {"text": "Cybercrime targets and Money involved"},
     "data": {
+        "name": "default",
         "url": "./Datasets/cybercrime.csv"
     },
     "transform": [
@@ -14,6 +15,16 @@
         {
             "calculate": "datum.lost/1000000",
             "as": "lostMillion"
+        },
+        {
+            "filter": "datum.year <= Year"
+        }
+    ],
+    "params": [
+        {
+            "name": "Year",
+            "value": 2020,
+            "bind": {"input": "range", "min": 2016, "max": 2020, "step": 1}
         }
     ],
     "layer": [
@@ -105,8 +116,17 @@
         }
     ],
     "config": {
+        "title": {
+            "fontSize": 16
+        },
+        "legend": {
+            "labelFontSize": 16,
+            "titleFontSize": 16
+        },
         "background": "transparent",
         "axis": {
+            "titleFontSize":16,
+            "labelFontSize":16,
             "grid": false
         }
     }

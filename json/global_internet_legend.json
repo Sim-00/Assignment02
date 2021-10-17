@@ -39,7 +39,7 @@
                 "field": "obj"
             },
             "range": {
-                "scheme": "tealblues"
+                "scheme": "yellowgreenblue"
             }
         }
     ],
@@ -53,6 +53,10 @@
         }
     ],
     "config": {
+        "legend": {
+            "labelFontSize": 14,
+            "titleFontSize": 16
+        },
         "background":"transparent"
     }
 }

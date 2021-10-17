@@ -12,6 +12,7 @@ p {
     vertical-align: bottom;
     margin-left: 5%;
     margin-right: 5%;
+    font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -30,7 +31,17 @@ p {
 h1 {
     text-align: center;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 50px;
     margin-top: 40px;
     font-family: 'Times New Roman', Times, serif;
+}
+
+h2{
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+b {
+    font-weight: bolder;
 }

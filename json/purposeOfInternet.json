@@ -34,16 +34,44 @@
     },
     "layer": [
        {
+            "params": [
+                {
+                    "name": "highlight",
+                    "select": {
+                        "type": "point",
+                        "on": "mouseover"
+                    }
+                }
+            ],
            "mark": {
                "type": "arc"
+           },
+           "encoding": {
+               "stroke": {
+                   "value": "black"
+               },
+                "strokeWidth":{
+                    "condition":{
+                        "param": "highlight",
+                        "empty": false,
+                        "value": 2
+                    }, "value": 0
+                }
            }
        },
        {
            "mark":{
                "type": "text",
-               "radiusOffset": 10
+               "radiusOffset": 25
            },
            "encoding": {
+               "size": {
+                "condition":{
+                    "param": "highlight",
+                    "empty": false,
+                    "value": 25
+                }, "value": 15
+               },
                "text":{
                    "field": "Percentage",
                    "type":"quantitative",
@@ -56,6 +84,11 @@
        }
     ],
     "config": {
+        "legend": {
+            "orient": "top-right",
+            "labelFontSize": 16,
+            "titleFontSize": 16
+        },
         "background":"transparent"
     }
 }

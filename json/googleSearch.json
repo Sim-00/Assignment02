@@ -1,19 +1,32 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": "container",
-    "height": 300,
-    "title": {"text": "Google search growth from 2000 to 2012"},
+    "height": 350,
+    "title": {"text": "Google search growth"},
     "data": {
         "url": "./Datasets/googleSearches.csv"
     },
     "transform": [
         {
             "calculate": "datum.Searches/1000000", "as": "calculatedSearches"
+        },
+        {
+            "filter": "datum.Year <= Year"
+        }
+    ],
+    "params": [
+        {
+            "name": "Year",
+            "value": 2012,
+            "bind": {"input": "range", "min": 2000, "max": 2012, "step": 1}
         }
     ],
     "encoding": {
         "x": {
-            "field": "Year"
+            "field": "Year",
+            "axis":{
+                "labelAngle": -45
+            }
         },
         "tooltip": [
             {
@@ -105,6 +118,13 @@
         }
     },
     "config": {
+        "title": {
+            "fontSize":16
+        },
+        "axis": {
+            "labelFontSize":16,
+            "titleFontSize":16
+        },
         "background": "transparent"
     }
 }
